@@ -21,13 +21,11 @@ function onEvent(eventSignature,functionHandleLog,addressEmitLog = null){
             eventSignature
         ]
     }
-    if (addressEmitLog == null){
-        delete filter.address
-    }
-    providers.on(filter, (log) => {
-        /**
-         * xử lý dữ liệu nghe được trong này.
-         */
+    // if (addressEmitLog == null){
+    //     delete filter.address
+    // }
+    addressEmitLog??(delete filter.address);
+    this.providers.on(filter, (log) => {
         functionHandleLog(log);
     })
 }
@@ -61,7 +59,14 @@ function getEventTopic(abi,eventName){
     return  instant.getEventTopic(eventName);
 }
 
-
+function fommat(abi){
+    const instant = new ethers.utils.Interface(abi);
+    return instant.format();
+}
+function events(abi){
+    const instant = new ethers.utils.Interface(abi);
+    return instant.events;
+}
 /**
  * @dev get event logs with block tag. 
  * @notice moralis restrict toBlock - fromBlock <=2000.
@@ -71,20 +76,27 @@ function getEventTopic(abi,eventName){
  * @param {bytes20} address default = null.
  * @returns Logs event satisfy filter.
  */
-async function getEventLogs(eventSignature, fromBlock = null, toBlock = null, addressEmitLog = null){
+async function getEventLogs(eventSignature, fromBlock, toBlock, addressEmitLog){
     let filter = {
         address: addressEmitLog,
         topics: [
             eventSignature
         ]
     }
-    if (addressEmitLog == null){
-        delete filter.address
-    }
-    let latest = await providers.getBlockNumber();
-    filter.fromBlock = (fromBlock != null)? fromBlock: latest-100; 
-    filter.toBlock = (toBlock != null)? toBlock: latest;
-    let logs = await providers.getLogs(filter);
+    // if (addressEmitLog == null){
+    //     delete filter.address
+    // }
+    addressEmitLog??(delete filter.address);
+
+    let latest = await this.providers.getBlockNumber();
+    // filter.fromBlock = (fromBlock != null)? fromBlock: latest-100; 
+    fromBlock ??= latest -100;
+    // filter.toBlock = (toBlock != null)? toBlock: latest;
+    toBlock ??= latest;
+
+    filter.fromBlock = fromBlock;
+    filter.toBlock = toBlock;
+    let logs = await this.providers.getLogs(filter);
     return logs;
 }
 
@@ -96,14 +108,19 @@ async function getEventLogs(eventSignature, fromBlock = null, toBlock = null, ad
  * @param {blockTag} toBlock default latest.
  * @returns Logs event satisfy filter.
  */
-async function getAddressLogs(addressEmitLog, fromBlock = null, toBlock = null){
+async function getAddressLogs(addressEmitLog, fromBlock, toBlock ){
     let filter = {
         address: addressEmitLog
     }
     let latest = await providers.getBlockNumber();
-    filter.fromBlock = (fromBlock != null)? fromBlock: latest-100; 
-    filter.toBlock = (toBlock != null)? toBlock: latest;
-    let logs = await providers.getLogs(filter);
+    // filter.fromBlock = (fromBlock != null)? fromBlock: latest-1; 
+    filter.fromBlock ??= latest-100;
+    // filter.toBlock = (toBlock != null)? toBlock: latest;
+    filter.toBlock ??= latest;
+
+    filter.fromBlock = fromBlock;
+    filter.toBlock = toBlock;
+    let logs = await this.providers.getLogs(filter);
     return logs;
 }
 /**
@@ -133,6 +150,8 @@ module.exports = {
         getEventTopic: getEventTopic,
         getEventLogs: getEventLogs,
         getAddressLogs: getAddressLogs,
-        parseLog: parseLog
+        parseLog: parseLog,
+        events: events,
+        fommat:fommat
 }
 
