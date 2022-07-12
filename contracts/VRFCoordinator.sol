@@ -1,17 +1,17 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 import './VRFConsumerBase.sol';
-contract VRFCoordinator{
+import './VRF.sol';
+contract VRFCoordinator is VRF{
     address public sender;
-    uint256 public value = 7;
-    event Transfer(address indexed sender, address indexed to, uint256 amount);
     event RandomRequested(address indexed sender);
-    function fulfillRandom() public{
-        VRFConsumerBase(sender).rawFulfillRandom(value);
+    function fulfillRandomness(Proof memory proof) public{
+        uint256 randomNumber = VRF.randomValueFromVRFProof(proof, proof.seed);
+        VRFConsumerBase(sender).rawFulfillRandom(randomNumber);
     }
-    function requestRandom() public{
+
+    function requestRandomness() public{
         sender = msg.sender;
         emit RandomRequested(msg.sender);
-        emit Transfer(sender, address(this), value);
     }
 }

@@ -13,8 +13,7 @@ contract VRFConsumer is VRFConsumerBase{
         random = randomNumber; 
     }
     function requestRandom() public {
-        owner = address(0);
-        VRFCoordinator(vrfCoordinator).requestRandom();
+        VRFCoordinator(vrfCoordinator).requestRandomness();
     }   
 
 }

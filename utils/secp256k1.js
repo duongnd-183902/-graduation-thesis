@@ -1,5 +1,6 @@
 
 const BN = require("bn.js");
+
 const randomBytes = require("crypto").randomBytes;
 
 const A  = uint256(0)
@@ -14,7 +15,6 @@ const FIELD_SIZE  = uint256("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 const GROUP_ORDER  = uint256("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141", 16)
 const _0 = uint256(0)
 const _1 = uint256(1)
-
 
 function uint256(x, base = 16) {
     return new BN(x, base)
@@ -262,5 +262,9 @@ module.exports = {
     projectiveECAdd: projectiveECAdd,
     projectiveECMul: projectiveECMul,
     affineECAdd: affineECAdd,
-    affineECMul: affineECMul
+    affineECMul: affineECMul,
+    GX: GX,
+    GY: GY,
+    FIELD_SIZE: FIELD_SIZE,
+    GROUP_ORDER: GROUP_ORDER
 }

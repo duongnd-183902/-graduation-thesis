@@ -4,7 +4,7 @@ const { ethers } = require('ethers');
 /**
  * Connect to provider moralis.
  */
-var url = 'https://speedy-nodes-nyc.moralis.io/9688ab0ed9dbdd3d2d76ffc6/eth/rinkeby';
+var url = 'https://rinkeby.infura.io/v3/407c094ecad24b84948a2acbb76266b9';
 const providers = new ethers.providers.JsonRpcProvider(url);
 
 
