@@ -1,16 +1,21 @@
 const { ethers } = require("hardhat");
-const proofVRF = require('../core/vrf');
-const { uint256 } = require("../utils/secp256k1");
 let deployer;
-async function main(){
+async function main() {
     [deployer] = await ethers.getSigners();
-    const VRFFactory = await ethers.getContractFactory('VRF',deployer);
+    const VRFFactory = await ethers.getContractFactory('FunctionSignature', deployer);
     const VRF = await VRFFactory.deploy();
     await VRF.deployed();
+
+    console.log(await VRF._operand());
+    let functionSignature = ethers.utils.id('add(uint256)').slice(0, 10);
+    let value = 5;
+    let bytes = ethers.utils.solidityPack(['bytes4', 'uint256'], [functionSignature, value]);
+
+    const [signer] = await ethers.getSigners();
+    let signed = await signer.signTransaction({to: VRF.address, data: bytes})
     
-    let proof = proofVRF.proofVRF(uint256(1));
-    console.log(proof)
-    let output = await VRF.randomValueFromVRFProof(proof,proof.seed);
-    console.log(output)
+    console.log(signed);
+    // await ethers.Signer.sendTransaction({to: VRF.address, data: bytes})
+    // console.log(await VRF._operand());
 }
 main()
