@@ -139,28 +139,7 @@ function proofVRF(seed, x = PRIVATE_KEY) {
     proof.zInv = invZ.toString();
     return proof;
 }
-let randomFunction = () => {
-    // let [gamma,c,s,k] = vRF(uint256(7));
-    // let u = affineECAdd(affineECMul(c,PUBLIC_KEY),affineECMul(s,G));
 
-    // h = hashToCurve(PUBLIC_KEY,uint256(7));
-    // let v = affineECAdd(affineECMul(c,gamma),affineECMul(s,h));
-    // console.log('pk:',PUBLIC_KEY);
-    // console.log('gamma:',gamma);
-    // console.log('c:', c.toString('hex'));
-    // console.log('s:', s.toString('hex'));
-    // console.log('seed:', uint256(7).toString('hex'));
-    // console.log('uWitness:', addressFromPoint(affineECAdd(affineECMul(c,PUBLIC_KEY),affineECMul(s,G))).toString('hex'));
-    // let cGammaWitness = affineECMul(c,gamma);
-    // let sHashWitness = affineECMul(s,h);
-    // console.log('cGammaWitness:', cGammaWitness);
-    // console.log('sHashWitness:', sHashWitness);
-    // let hihi = projectiveECAdd(cGammaWitness[0],cGammaWitness[1],_1,sHashWitness[0],sHashWitness[1],_1);
-    // console.log('invZ:', hihi[2].toString('hex'))
-    // let s = uint256('107270479222432506449330185714526618327425448364454292479158508103178666665932',10);
-    // let h = hashToCurve(PUBLIC_KEY,1);
-}
-// randomFunction();
 
 module.exports = {
     proofVRF: proofVRF

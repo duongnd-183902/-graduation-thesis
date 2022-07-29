@@ -5,7 +5,7 @@ const { ethers } = require('hardhat');
 
 
 async function main(){
-    let [deployer] = await ethers.getSigners();
+    const [deployer, AOracle, BOracle, consumer] = await ethers.getSigners();
     let vrfCoordinator = '0x673D93552c3595C764C8fe59e5F04a3E9Be7C020';
     const VRFCoordinator = await ethers.getContractAt("VRFCoordinator",vrfCoordinator);
     // console.log('sender call coordinator:',await VRFCoordinator.sender());

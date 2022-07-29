@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
-import "./VRFConsumerBase.sol";
-import "./VRFCoordinator.sol";
+import "../interfaces/VRFConsumerBase.sol";
+import "../VRFCoordinator.sol";
 
 contract VRFConsumer is VRFConsumerBase {
     address public owner;
