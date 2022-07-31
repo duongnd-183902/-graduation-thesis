@@ -35,12 +35,13 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         uint256 indexed requestId,
         uint256 preeSeed
     );
-
+    event Transfer(address indexed sender, address indexed to, uint256 amount);
     constructor(
         address duongndToken,
         uint256 _fee,
         uint256 _threshold
     ) {
+        owner = msg.sender;
         DuongndToken = ERC20(duongndToken);
         fee = _fee;
         threshold = _threshold;
@@ -51,7 +52,7 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         uint256[2] calldata publicProvingKey
     ) external onlyOwner {
         bytes32 kh = hashOfKey(publicProvingKey);
-        require(oracles[kh] != address(0), "VRFCoordinator: Oracle exists");
+        require(oracles[kh] == address(0), "VRFCoordinator: Oracle exists");
         oracles[kh] = oracle;
     }
 
@@ -106,6 +107,7 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         require(!isConsumer[consumer], "VRFCoordinator: Consumer exists!");
         DuongndToken.transferFrom(msg.sender, address(this), amount);
         balances[consumer] += amount;
+        isConsumer[consumer] = true;
     }
 
     function removeConsumer(address consumer) public override{
@@ -116,3 +118,4 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         isConsumer[consumer] = false;
     }
 }
+ 

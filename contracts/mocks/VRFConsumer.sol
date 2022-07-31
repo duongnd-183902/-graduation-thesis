@@ -5,7 +5,7 @@ import "../VRFCoordinator.sol";
 
 contract VRFConsumer is VRFConsumerBase {
     address public owner;
-    address public vrfCoordinator = 0x5FbDB2315678afecb367f032d93F642f64180aa3;
+    address public vrfCoordinator = 0xFE5725db462CC0a4ACa15FD9317298b1a52582b5;
     uint256 public random;
     uint256 public requestId;
 

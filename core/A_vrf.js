@@ -13,7 +13,7 @@ const GY = ECDSA.GY;
 const G = [GX, GY];
 const SQRT_POWER = (FIELD_SIZE.add(_1)).shrn(2);
 
-const PRIVATE_KEY = uint256(process.env.PRIVATE_KEY);
+const PRIVATE_KEY = uint256(process.env.PRIVATE_KEY_A);
 const PUBLIC_KEY = ECDSA.affineECMul(PRIVATE_KEY, [GX, GY])
 const HASH_TO_CURVE_HASH_PREFIX = _1;
 const SCALAR_FROM_CURVE_POINTS_HASH_PREFIX = uint256(2);
