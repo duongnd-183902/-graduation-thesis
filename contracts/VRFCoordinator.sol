@@ -36,6 +36,7 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         uint256 preeSeed
     );
     event Transfer(address indexed sender, address indexed to, uint256 amount);
+
     constructor(
         address duongndToken,
         uint256 _fee,
@@ -50,7 +51,7 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
     function registerOracle(
         address oracle,
         uint256[2] calldata publicProvingKey
-    ) external onlyOwner {
+    ) external override onlyOwner {
         bytes32 kh = hashOfKey(publicProvingKey);
         require(oracles[kh] == address(0), "VRFCoordinator: Oracle exists");
         oracles[kh] = oracle;
@@ -110,7 +111,7 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         isConsumer[consumer] = true;
     }
 
-    function removeConsumer(address consumer) public override{
+    function removeConsumer(address consumer) public override {
         require(
             isConsumer[consumer],
             "VRFCoordinator: Consumer does not exist"
@@ -118,4 +119,3 @@ contract VRFCoordinator is VRF, IVRFCoordinator {
         isConsumer[consumer] = false;
     }
 }
- 

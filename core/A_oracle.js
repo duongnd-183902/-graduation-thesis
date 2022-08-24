@@ -5,7 +5,7 @@ const { ethers } = require('hardhat');
 const VRFCoordinatorFactoryJSON = require('../artifacts/contracts/VRFCoordinator.sol/VRFCoordinator.json');
 
 let abi = VRFCoordinatorFactoryJSON.abi;
-let pointer = 11120753;
+let pointer = 11175561;
 let step = 10;
 
 let vrfCoordinator = '0xFE5725db462CC0a4ACa15FD9317298b1a52582b5';

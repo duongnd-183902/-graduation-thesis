@@ -1,0 +1,89 @@
+\titleformat{\chapter}[hang]{\centering\bfseries}{CHAPTER \thechapter.\ }{0pt}{}[]
+
+\titleformat 
+    {\chapter} % command
+    [hang] % shape
+    {\centering\bfseries} % format
+    {CHƯƠNG \thechapter.\ } % label
+    {0pt} %sep
+    {} % before
+    [] % after
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+
+
+\titleformat
+    {\section} % command
+    [hang] % shape
+    {\bfseries} % format
+    {\thechapter.\arabic{section}\ \ \ \ } % label
+    {0pt} %sep
+    {} % before
+    [] % after
+\titlespacing{\section}{0pt}{\parskip}{0.5\parskip}
+
+\titleformat
+    {\subsection} % command
+    [hang] % shape
+    {\bfseries} % format
+    {\thechapter.\arabic{section}.\arabic{subsection}\ \ \ \ } % label
+    {0pt} %sep
+    {} % before
+    [] % after
+\titlespacing{\subsection}{0pt}{\parskip}{0.5\parskip}
+
+\renewcommand\thesubsubsection{\alph{subsubsection}}
+\titleformat
+    {\subsubsection} % command
+    [hang] % shape
+    {\bfseries} % format
+    {\alph{subsubsection}, \ } % label
+    {0pt} %sep
+    {} % before
+    [] % after
+\titlespacing{\subsubsection}{50pt}{\parskip}{0.5\parskip}
+
+% ===================================================
+
+\hypersetup{pdfborder = {0 0 0}}
+\hypersetup{pdftitle={\TITLE},
+	pdfauthor={\AUTHOR}}
+	
+\usepackage[all]{hypcap} % Cho phép tham chiếu chính xác đến hình ảnh và bảng biểu
+
+\graphicspath{{figures/}{../figures/}} % Thư mục chứa các hình ảnh
+
+\counterwithin{figure}{chapter} % Đánh số hình ảnh kèm theo chapter. Ví dụ: Hình 1.1, 1.2,..
+
+\title{\bf \TITLE}
+\author{\AUTHOR}
+
+\setcounter{secnumdepth}{3} % Cho phép subsubsection trong report
+% \setcounter{tocdepth}{3} % Chèn subsubsection vào bảng mục lục
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Định lý}[section]
+\newtheorem{cy}[theorem]{Chú ý}%[subsection]
+\newtheorem{bd}[theorem]{Bổ đề}%[subsection]
+\newtheorem{bt}[theorem]{Bài toán}%[subsection]
+\newtheorem{md}[theorem]{Mệnh đề}%[subsection]
+\newtheorem{Bt}[theorem]{Bài toán}%[subsection]
+\newtheorem{hq}[theorem]{Hệ quả}%[subsection]
+\newtheorem{kh}[theorem]{Kí hiệu}%[subsection]
+\newtheorem{vd}[theorem]{\bf Ví dụ}%[subsection]
+\newtheorem{nx}[theorem]{\bf Nhận xét}%[subsection]
+
+% 1 
+\newtheorem{theorem1}{cac' Định nghia}[section]
+% 2
+\newtheorem{dn}[theorem1]{\bf Định nghĩa}%[subsection] 
+\newtheorem{dl}[theorem]{\bf Định lý}
+\newcommand\tab[1][0.7cm]{\hspace*{#1}}
+\onehalfspacing
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{15pt}
+
+
